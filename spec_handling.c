@@ -1,0 +1,51 @@
+#include "ft_printf.h"
+
+void handle_spec(char spcfr, int *len, va_list args)
+{
+    if (spcfr == 'c')
+        handle_chr(len, args);
+    else if (spcfr == 's')
+        handle_str(len, args);
+    else if (spcfr == 'p')
+        handle_pntr(len, args);
+    else if (ft_strchr("uxXdi", spcfr))
+		handle_nbr(spcfr, len, args);
+    else if (spcfr == '%')
+        *len += write(1, "%", 1);
+}
+
+static void	handle_chr(int *len, va_list args)
+{
+    char c;
+	c = va_arg(args, int);
+	*len += write(1, &c, 1);
+}
+
+static void	handle_str(int *len, va_list args)
+{
+    char *str;
+	str = va_arg(args, char *);
+	if (str == NULL)
+		*len += write(1, "(null)", 6);
+	else
+		*len += ft_putstr(str);
+}
+
+static void	handle_pntr(int *len, va_list args)
+{
+	unsigned long ptr;
+
+	ptr = va_arg(args, unsigned long);
+	if (!ptr)
+		*len += ft_putstr("(nil)");
+	else
+		*len += ft_putstr("0x") + ft_putnbr_base(ptr, 'p');
+}
+
+static void	handle_nbr(char specifier, int *len, va_list args)
+{
+	if (specifier == 'd' || specifier == 'i')
+		*len += ft_putnbr(va_arg(args, int));
+	else if (ft_strchr("uxX", specifier))
+		*len += ft_putnbr_base(va_arg(args, unsigned int), specifier);
+}
