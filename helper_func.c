@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_func.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/05 19:34:46 by vpozniak          #+#    #+#             */
+/*   Updated: 2025/02/05 19:34:47 by vpozniak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_putstr(char *s)
@@ -34,22 +46,22 @@ int	ft_putnbr_base(unsigned long arg, int specifier)
 
 int	ft_putnbr(int n)
 {
-    int		len;
-    char	digit;
+	int		len;
+	char	digit;
 
-    len = 0;
-    if (n == -2147483648)
-        return (write(1, "-2147483648", 11));
-    if (n < 0)
-    {
-        len += write(1, "-", 1);
-        n = -n;
-    }
-    if (n >= 10)
-        len += ft_putnbr(n / 10);
-    digit = (n % 10) + '0';
-    len += write(1, &digit, 1);
-    return (len);
+	len = 0;
+	if (n == -2147483648)
+		return (write(1, "-2147483648", 11));
+	if (n < 0)
+	{
+		len += write(1, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+		len += ft_putnbr(n / 10);
+	digit = (n % 10) + '0';
+	len += write(1, &digit, 1);
+	return (len);
 }
 
 char	*ft_strchr(const char *str, int c)
