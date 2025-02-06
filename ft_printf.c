@@ -6,34 +6,36 @@
 /*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:32:04 by vpozniak          #+#    #+#             */
-/*   Updated: 2025/02/05 19:32:06 by vpozniak         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:06:15 by vpozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
-    va_list args;
-    int len = 0;
-    int i = 0;
+	va_list	args;
+	int		len;
+	int		i;
 
-    va_start(args, str);
-    while (str[i])
-    {
-        if (str[i] == '%')
-        {
-            i++;
-            if (str[i] == '\0')
-                break;
-            handle_spec(str[i], &len, args);
-        }
-        else
-        {
-            len += write(1, &str[i], 1);
-        }
-        i++;
-    }
-    va_end(args);
-    return (len);
+	len = 0;
+	i = 0;
+	va_start(args, str);
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			i++;
+			if (str[i] == '\0')
+				break ;
+			handle_spec(str[i], &len, args);
+		}
+		else
+		{
+			len += write(1, &str[i], 1);
+		}
+		i++;
+	}
+	va_end(args);
+	return (len);
 }

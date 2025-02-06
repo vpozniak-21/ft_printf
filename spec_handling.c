@@ -6,37 +6,38 @@
 /*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:34:14 by vpozniak          #+#    #+#             */
-/*   Updated: 2025/02/05 19:34:15 by vpozniak         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:07:15 by vpozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
-void handle_spec(char spcfr, int *len, va_list args)
+void	handle_spec(char spcfr, int *len, va_list args)
 {
-    if (spcfr == 'c')
-        handle_chr(len, args);
-    else if (spcfr == 's')
-        handle_str(len, args);
-    else if (spcfr == 'p')
-        handle_pntr(len, args);
-    else if (ft_strchr("uxXdi", spcfr))
+	if (spcfr == 'c')
+		handle_chr(len, args);
+	else if (spcfr == 's')
+		handle_str(len, args);
+	else if (spcfr == 'p')
+		handle_pntr(len, args);
+	else if (ft_strchr("uxXdi", spcfr))
 		handle_nbr(spcfr, len, args);
-    else if (spcfr == '%')
-        *len += write(1, "%", 1);
+	else if (spcfr == '%')
+		*len += write(1, "%", 1);
 }
 
 static void	handle_chr(int *len, va_list args)
 {
-    char c;
+	char	c;
+
 	c = va_arg(args, int);
 	*len += write(1, &c, 1);
 }
 
 static void	handle_str(int *len, va_list args)
 {
-    char *str;
+	char	*str;
+
 	str = va_arg(args, char *);
 	if (str == NULL)
 		*len += write(1, "(null)", 6);
@@ -46,7 +47,7 @@ static void	handle_str(int *len, va_list args)
 
 static void	handle_pntr(int *len, va_list args)
 {
-	unsigned long ptr;
+	unsigned long	ptr;
 
 	ptr = va_arg(args, unsigned long);
 	if (!ptr)
