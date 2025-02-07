@@ -6,9 +6,10 @@
 /*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:34:46 by vpozniak          #+#    #+#             */
-/*   Updated: 2025/02/06 10:07:27 by vpozniak         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:59:23 by vpozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ft_printf.h"
 
@@ -28,6 +29,7 @@ int	ft_putnbr_base(unsigned long arg, int specifier)
 	int		base_len;
 	int		len;
 
+	base = NULL;
 	if (specifier == 'u')
 		base = "0123456789";
 	else if (specifier == 'x' || specifier == 'p')

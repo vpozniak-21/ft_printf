@@ -6,7 +6,7 @@
 /*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:34:57 by vpozniak          #+#    #+#             */
-/*   Updated: 2025/02/06 10:06:23 by vpozniak         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:39:28 by vpozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 
 int		ft_printf(const char *str, ...);
-void	ft_handle_specifiers(char current_char, int *len, va_list args);
+void	ft_handle_spec(char spcfr, int *len, va_list args);
 int		ft_putstr(char *s);
 int		ft_putnbr(int n);
 int		ft_putnbr_base(unsigned long value, int specifier);

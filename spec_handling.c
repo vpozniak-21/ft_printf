@@ -6,27 +6,32 @@
 /*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:34:14 by vpozniak          #+#    #+#             */
-/*   Updated: 2025/02/06 10:07:15 by vpozniak         ###   ########.fr       */
+/*   Updated: 2025/02/07 20:02:39 by vpozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_spec(char spcfr, int *len, va_list args)
+static void	ft_handle_chr(int *len, va_list args);
+static void	ft_handle_str(int *len, va_list args);
+static void	ft_handle_pntr(int *len, va_list args);
+static void	ft_handle_nbr(char specifier, int *len, va_list args);
+
+void	ft_handle_spec(char spcfr, int *len, va_list args)
 {
 	if (spcfr == 'c')
-		handle_chr(len, args);
+		ft_handle_chr(len, args);
 	else if (spcfr == 's')
-		handle_str(len, args);
+		ft_handle_str(len, args);
 	else if (spcfr == 'p')
-		handle_pntr(len, args);
+		ft_handle_pntr(len, args);
 	else if (ft_strchr("uxXdi", spcfr))
-		handle_nbr(spcfr, len, args);
+		ft_handle_nbr(spcfr, len, args);
 	else if (spcfr == '%')
 		*len += write(1, "%", 1);
 }
 
-static void	handle_chr(int *len, va_list args)
+static void	ft_handle_chr(int *len, va_list args)
 {
 	char	c;
 
@@ -34,7 +39,7 @@ static void	handle_chr(int *len, va_list args)
 	*len += write(1, &c, 1);
 }
 
-static void	handle_str(int *len, va_list args)
+static void	ft_handle_str(int *len, va_list args)
 {
 	char	*str;
 
@@ -45,7 +50,7 @@ static void	handle_str(int *len, va_list args)
 		*len += ft_putstr(str);
 }
 
-static void	handle_pntr(int *len, va_list args)
+static void	ft_handle_pntr(int *len, va_list args)
 {
 	unsigned long	ptr;
 
@@ -56,7 +61,7 @@ static void	handle_pntr(int *len, va_list args)
 		*len += ft_putstr("0x") + ft_putnbr_base(ptr, 'p');
 }
 
-static void	handle_nbr(char specifier, int *len, va_list args)
+static void	ft_handle_nbr(char specifier, int *len, va_list args)
 {
 	if (specifier == 'd' || specifier == 'i')
 		*len += ft_putnbr(va_arg(args, int));

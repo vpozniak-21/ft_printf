@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    MAKEFILE                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/05 20:12:22 by vpozniak          #+#    #+#              #
-#    Updated: 2025/02/05 20:12:23 by vpozniak         ###   ########.fr        #
+#    Updated: 2025/02/07 19:50:42 by vpozniak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,35 +15,24 @@ AR = ar rcs
 CC = cc
 CFLAGS = -Werror -Wextra -Wall
 SRC = ft_printf.c helper_func.c spec_handling.c
-OBJ = ft_printf.o helper_func.o spec_handling.o
-
+OBJ = $(SRC:.c=.o)
+HEADER = ft_printf.h
 
 all: $(NAME)
 
-
-$(NAME):  $(OBJ)
+$(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
 
-#%.o : %.c
-#$(CC) $(CFLAGS) -c $< -o $@
-#above is same as below
 
-ft_printf.o : ft_printf.c
-	$(CC) $(CFLAGS) -c ft_printf.c -o $@
+%.o: %.c 
+	$(CC) $(CFLAGS) -c $< -o $@
 
-helper_func.o : helper_func.c
-	$(CC) $(CFLAGS) -c helper_func.c -o $@
-
-spec_handling.o : spec_handling.c
-	$(CC) $(CFLAGS) -c spec_handling.c -o $@
-
-clean :
+clean:
 	rm -f $(OBJ)
 
-
-fclean : clean
+fclean: clean
 	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re

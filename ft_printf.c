@@ -6,7 +6,7 @@
 /*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:32:04 by vpozniak          #+#    #+#             */
-/*   Updated: 2025/02/06 10:06:15 by vpozniak         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:16:38 by vpozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_printf(const char *str, ...)
 			i++;
 			if (str[i] == '\0')
 				break ;
-			handle_spec(str[i], &len, args);
+			ft_handle_spec(str[i], &len, args);
 		}
 		else
 		{
