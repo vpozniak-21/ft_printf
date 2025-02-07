@@ -6,10 +6,9 @@
 /*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:34:46 by vpozniak          #+#    #+#             */
-/*   Updated: 2025/02/07 19:59:23 by vpozniak         ###   ########.fr       */
+/*   Updated: 2025/02/07 20:23:28 by vpozniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_printf.h"
 
